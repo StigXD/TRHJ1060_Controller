@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "TRHJ1060_Controller.Api/1.0.0": {
+        "runtime": {
+          "TRHJ1060_Controller.Api.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "TRHJ1060_Controller.Api/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

@@ -1,0 +1,11 @@
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller_Common\bin\Debug\net8.0\TRHJ1060_Controller.Common.deps.json
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller_Common\bin\Debug\net8.0\TRHJ1060_Controller.Common.dll
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller_Common\bin\Debug\net8.0\TRHJ1060_Controller.Common.pdb
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller_Common\obj\Debug\net8.0\TRHJ1060_Controller.Common.GeneratedMSBuildEditorConfig.editorconfig
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller_Common\obj\Debug\net8.0\TRHJ1060_Controller.Common.AssemblyInfoInputs.cache
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller_Common\obj\Debug\net8.0\TRHJ1060_Controller.Common.AssemblyInfo.cs
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller_Common\obj\Debug\net8.0\TRHJ1060_Controller.Common.csproj.CoreCompileInputs.cache
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller_Common\obj\Debug\net8.0\TRHJ1060_Controller.Common.dll
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller_Common\obj\Debug\net8.0\refint\TRHJ1060_Controller.Common.dll
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller_Common\obj\Debug\net8.0\TRHJ1060_Controller.Common.pdb
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller_Common\obj\Debug\net8.0\ref\TRHJ1060_Controller.Common.dll
