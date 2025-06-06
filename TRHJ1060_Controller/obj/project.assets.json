@@ -1597,6 +1597,44 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
+      },
+      "TRHJ1060_Controller.Api/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "TRHJ1060_Controller.Common": "1.0.0",
+          "TRHJ1060_Controller.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/TRHJ1060_Controller.Api.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TRHJ1060_Controller.Api.dll": {}
+        }
+      },
+      "TRHJ1060_Controller.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/TRHJ1060_Controller.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TRHJ1060_Controller.Common.dll": {}
+        }
+      },
+      "TRHJ1060_Controller.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "SerialPortStream": "2.4.2",
+          "TRHJ1060_Controller.Common": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/TRHJ1060_Controller.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TRHJ1060_Controller.Domain.dll": {}
+        }
       }
     }
   },
@@ -5365,13 +5403,31 @@
         "system.xml.xdocument.4.3.0.nupkg.sha512",
         "system.xml.xdocument.nuspec"
       ]
+    },
+    "TRHJ1060_Controller.Api/1.0.0": {
+      "type": "project",
+      "path": "../TRHJ1060_Controller.Api/TRHJ1060_Controller.Api.csproj",
+      "msbuildProject": "../TRHJ1060_Controller.Api/TRHJ1060_Controller.Api.csproj"
+    },
+    "TRHJ1060_Controller.Common/1.0.0": {
+      "type": "project",
+      "path": "../TRHJ1060_Controller_Common/TRHJ1060_Controller.Common.csproj",
+      "msbuildProject": "../TRHJ1060_Controller_Common/TRHJ1060_Controller.Common.csproj"
+    },
+    "TRHJ1060_Controller.Domain/1.0.0": {
+      "type": "project",
+      "path": "../TRHJ1060_Controller.Domain/TRHJ1060_Controller.Domain.csproj",
+      "msbuildProject": "../TRHJ1060_Controller.Domain/TRHJ1060_Controller.Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0-windows7.0": [
       "LiveCharts.Wpf >= 0.9.7",
       "Newtonsoft.Json >= 13.0.3",
-      "SerialPortStream >= 2.4.2"
+      "SerialPortStream >= 2.4.2",
+      "TRHJ1060_Controller.Api >= 1.0.0",
+      "TRHJ1060_Controller.Common >= 1.0.0",
+      "TRHJ1060_Controller.Domain >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -5405,7 +5461,17 @@
       "frameworks": {
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\Kozhevnikov\\TRHJ-1060\\TRHJ1060_Controller\\TRHJ1060_Controller.Api\\TRHJ1060_Controller.Api.csproj": {
+              "projectPath": "D:\\Kozhevnikov\\TRHJ-1060\\TRHJ1060_Controller\\TRHJ1060_Controller.Api\\TRHJ1060_Controller.Api.csproj"
+            },
+            "D:\\Kozhevnikov\\TRHJ-1060\\TRHJ1060_Controller\\TRHJ1060_Controller.Domain\\TRHJ1060_Controller.Domain.csproj": {
+              "projectPath": "D:\\Kozhevnikov\\TRHJ-1060\\TRHJ1060_Controller\\TRHJ1060_Controller.Domain\\TRHJ1060_Controller.Domain.csproj"
+            },
+            "D:\\Kozhevnikov\\TRHJ-1060\\TRHJ1060_Controller\\TRHJ1060_Controller_Common\\TRHJ1060_Controller.Common.csproj": {
+              "projectPath": "D:\\Kozhevnikov\\TRHJ-1060\\TRHJ1060_Controller\\TRHJ1060_Controller_Common\\TRHJ1060_Controller.Common.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -5418,7 +5484,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0-windows7.0": {
@@ -5456,7 +5522,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
       }
     }
   },

@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TRHJ1060_Controller.Domain\TRHJ1060_Controller.Domain.csproj" />
+    <ProjectReference Include="..\TRHJ1060_Controller_Common\TRHJ1060_Controller.Common.csproj" />
+  </ItemGroup>
+
 </Project>

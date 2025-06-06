@@ -1,13 +1,12 @@
 ﻿using RJCP.IO.Ports;
 
-namespace TRHJ1060_Controller.Domain.Services;
-
-public class SerialPortManager
+namespace TRHJ1060_Controller.Domain.Services
 {
-	public List<string>? SerialPorts { get; }
-
-	private void LoadAvailablePorts()
+	public class SerialPortManager
 	{
-		SerialPorts.AddRange(SerialPortStream.GetPortNames());
+		public List<string> GetAvailablePorts()
+		{
+			return new List<string>(SerialPortStream.GetPortNames());
+		}
 	}
 }

@@ -9,3 +9,10 @@ D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller.Api\obj\Debug\n
 D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller.Api\obj\Debug\net8.0\refint\TRHJ1060_Controller.Api.dll
 D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller.Api\obj\Debug\net8.0\TRHJ1060_Controller.Api.pdb
 D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller.Api\obj\Debug\net8.0\ref\TRHJ1060_Controller.Api.dll
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller.Api\bin\Debug\net8.0\TRHJ1060_Controller.Common.dll
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller.Api\bin\Debug\net8.0\TRHJ1060_Controller.Domain.dll
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller.Api\bin\Debug\net8.0\TRHJ1060_Controller.Domain.pdb
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller.Api\bin\Debug\net8.0\TRHJ1060_Controller.Common.pdb
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller.Api\obj\Debug\net8.0\TRHJ1060_Controller.Api.csproj.AssemblyReference.cache
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller.Api\obj\Debug\net8.0\TRHJ1060_Controller.Api.sourcelink.json
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller.Api\obj\Debug\net8.0\TRHJ1060.473161AA.Up2Date

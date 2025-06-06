@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TRHJ1060_Controller.Common")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+253323af5b19a2dbb5dd5055211615e6f6c30070")]
 [assembly: System.Reflection.AssemblyProductAttribute("TRHJ1060_Controller.Common")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TRHJ1060_Controller.Common")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

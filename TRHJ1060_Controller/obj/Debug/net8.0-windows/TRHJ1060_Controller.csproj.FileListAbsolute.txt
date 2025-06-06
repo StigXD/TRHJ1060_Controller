@@ -6,7 +6,6 @@ D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller\bin\Debug\net8.
 D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller\obj\Debug\net8.0-windows\MainWindow.g.cs
 D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller\obj\Debug\net8.0-windows\App.g.cs
 D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller\obj\Debug\net8.0-windows\TRHJ1060_Controller_MarkupCompile.cache
-D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller\obj\Debug\net8.0-windows\TRHJ1060_Controller_MarkupCompile.lref
 D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller\obj\Debug\net8.0-windows\MainWindow.baml
 D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller\obj\Debug\net8.0-windows\TRHJ1060_Controller.g.resources
 D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller\obj\Debug\net8.0-windows\TRHJ1060_Controller.GeneratedMSBuildEditorConfig.editorconfig
@@ -18,3 +17,17 @@ D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller\obj\Debug\net8.
 D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller\obj\Debug\net8.0-windows\TRHJ1060_Controller.pdb
 D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller\obj\Debug\net8.0-windows\TRHJ1060_Controller.genruntimeconfig.cache
 D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller\obj\Debug\net8.0-windows\ref\TRHJ1060_Controller.dll
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller\bin\Debug\net8.0-windows\LiveCharts.dll
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller\bin\Debug\net8.0-windows\LiveCharts.Wpf.dll
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller\bin\Debug\net8.0-windows\RJCP.SerialPortStream.dll
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller\obj\Debug\net8.0-windows\TRHJ1060_Controller.csproj.AssemblyReference.cache
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller\obj\Debug\net8.0-windows\TRHJ1060_Controller.sourcelink.json
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller\obj\Debug\net8.0-windows\TRHJ1060.1F1B88A4.Up2Date
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller\bin\Debug\net8.0-windows\TRHJ1060_Controller.Api.dll
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller\bin\Debug\net8.0-windows\TRHJ1060_Controller.Common.dll
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller\bin\Debug\net8.0-windows\TRHJ1060_Controller.Domain.dll
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller\bin\Debug\net8.0-windows\TRHJ1060_Controller.Api.pdb
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller\bin\Debug\net8.0-windows\TRHJ1060_Controller.Domain.pdb
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller\bin\Debug\net8.0-windows\TRHJ1060_Controller.Common.pdb

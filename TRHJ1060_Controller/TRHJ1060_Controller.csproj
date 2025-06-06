@@ -14,4 +14,10 @@
     <PackageReference Include="SerialPortStream" Version="2.4.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TRHJ1060_Controller.Api\TRHJ1060_Controller.Api.csproj" />
+    <ProjectReference Include="..\TRHJ1060_Controller.Domain\TRHJ1060_Controller.Domain.csproj" />
+    <ProjectReference Include="..\TRHJ1060_Controller_Common\TRHJ1060_Controller.Common.csproj" />
+  </ItemGroup>
+
 </Project>

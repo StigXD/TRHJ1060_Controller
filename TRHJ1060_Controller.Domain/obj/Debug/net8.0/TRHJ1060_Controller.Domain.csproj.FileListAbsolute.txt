@@ -9,3 +9,8 @@ D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller.Domain\obj\Debu
 D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller.Domain\obj\Debug\net8.0\refint\TRHJ1060_Controller.Domain.dll
 D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller.Domain\obj\Debug\net8.0\TRHJ1060_Controller.Domain.pdb
 D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller.Domain\obj\Debug\net8.0\ref\TRHJ1060_Controller.Domain.dll
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller.Domain\bin\Debug\net8.0\TRHJ1060_Controller.Common.dll
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller.Domain\bin\Debug\net8.0\TRHJ1060_Controller.Common.pdb
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller.Domain\obj\Debug\net8.0\TRHJ1060_Controller.Domain.csproj.AssemblyReference.cache
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller.Domain\obj\Debug\net8.0\TRHJ1060_Controller.Domain.sourcelink.json
+D:\Kozhevnikov\TRHJ-1060\TRHJ1060_Controller\TRHJ1060_Controller.Domain\obj\Debug\net8.0\TRHJ1060.4EC4B848.Up2Date
