@@ -56,6 +56,8 @@
 					<Grid.RowDefinitions>
 						<RowDefinition Height="Auto"/>
 						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+						<!-- Новая строка для одиночных команд -->
 						<RowDefinition Height="*"/>
 					</Grid.RowDefinitions>
 
@@ -98,11 +100,11 @@
 
 							<TextBlock Grid.Row="1" Grid.Column="2" Text="Амплитуда (dB):" Margin="10,0,5,5"/>
 							<Slider Grid.Row="1" Grid.Column="3" x:Name="sliderAmplitude" Minimum="0" Maximum="15.5" 
-                                    TickFrequency="0.5" IsSnapToTickEnabled="True" Margin="0,0,0,5"/>
+                        TickFrequency="0.5" IsSnapToTickEnabled="True" Margin="0,0,0,5"/>
 
 							<TextBlock Grid.Row="2" Grid.Column="0" Text="Фаза (°):" Margin="0,0,5,0"/>
 							<Slider Grid.Row="2" Grid.Column="1" x:Name="sliderPhase" Minimum="0" Maximum="360" 
-                                    TickFrequency="5.625" IsSnapToTickEnabled="True"/>
+                        TickFrequency="5.625" IsSnapToTickEnabled="True"/>
 
 							<TextBlock Grid.Row="2" Grid.Column="2" Text="Значения:" Margin="10,0,5,0"/>
 							<StackPanel Grid.Row="2" Grid.Column="3" Orientation="Horizontal">
@@ -116,18 +118,54 @@
 					<GroupBox Grid.Row="1" Header="Команды" Margin="0,0,0,10">
 						<StackPanel Orientation="Horizontal">
 							<Button x:Name="btnSetAmplitudePhase" Content="Установить амплитуду/фазу" 
-                                    Width="180" Margin="5" Click="BtnSetAmplitudePhase_Click"/>
+                        Width="180" Margin="5" Click="BtnSetAmplitudePhase_Click"/>
 							<Button x:Name="btnEnableChannel" Content="Включить канал" 
-                                    Width="120" Margin="5" Click="BtnEnableChannel_Click"/>
+                        Width="120" Margin="5" Click="BtnEnableChannel_Click"/>
 							<Button x:Name="btnReadTemperature" Content="Прочитать температуру" 
-                                    Width="150" Margin="5" Click="BtnReadTemperature_Click"/>
+                        Width="150" Margin="5" Click="BtnReadTemperature_Click"/>
 						</StackPanel>
 					</GroupBox>
 
+					<!-- Новая секция: Отправка одиночных команд -->
+					<GroupBox Grid.Row="2" Header="Отправка одиночных команд" Margin="0,0,0,10">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="Auto"/>
+							</Grid.ColumnDefinitions>
+
+							<TextBox x:Name="txtRawCommand" 
+                         VerticalAlignment="Center"
+                         Margin="0,0,10,0"
+                         ToolTip="Введите команду в HEX формате (например: A1B2C3)">
+								<TextBox.Style>
+									<Style TargetType="TextBox">
+										<Style.Triggers>
+											<Trigger Property="IsKeyboardFocused" Value="False">
+												<Setter Property="Foreground" Value="Gray"/>
+												<Setter Property="Text" Value="Введите HEX команду..."/>
+											</Trigger>
+											<Trigger Property="IsKeyboardFocused" Value="True">
+												<Setter Property="Foreground" Value="Black"/>
+												<Setter Property="Text" Value=""/>
+											</Trigger>
+										</Style.Triggers>
+									</Style>
+								</TextBox.Style>
+							</TextBox>
+
+							<Button Grid.Column="1" 
+                        x:Name="btnSendRawCommand" 
+                        Content="Отправить" 
+                        Width="80"
+                        Click="BtnSendRawCommand_Click"/>
+						</Grid>
+					</GroupBox>
+
 					<!-- Ответ устройства -->
-					<GroupBox Grid.Row="2" Header="Ответ устройства">
+					<GroupBox Grid.Row="3" Header="Ответ устройства">
 						<TextBox x:Name="txtResponse" IsReadOnly="True" VerticalScrollBarVisibility="Auto" 
-                                 HorizontalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
+                     HorizontalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
 					</GroupBox>
 				</Grid>
 			</TabItem>
