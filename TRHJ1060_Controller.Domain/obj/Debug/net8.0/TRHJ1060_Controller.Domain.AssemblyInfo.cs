@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TRHJ1060_Controller.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+43479856a116a501c565e9533f9de6bae68baf87")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b7d10282e13a443a4a0bc2cfdba5e82f9f9efab2")]
 [assembly: System.Reflection.AssemblyProductAttribute("TRHJ1060_Controller.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TRHJ1060_Controller.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
