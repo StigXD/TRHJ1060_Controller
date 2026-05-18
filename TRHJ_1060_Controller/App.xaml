@@ -1,0 +1,9 @@
+﻿<Application x:Class="TRHJ_1060_Controller.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:TRHJ_1060_Controller"
+             StartupUri="DeviceSelectionWindow.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
