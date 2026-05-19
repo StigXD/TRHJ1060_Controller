@@ -1,5 +1,5 @@
 ﻿namespace TRHJ_1060_Controller;
-public class TRHJ1060_CommandBuilder
+public class TRHJ1060CommandBuilder
 {
 		// Основные функции согласно Table 7 (стр. 11)
 	public enum SpiFunction : uint
