@@ -1,5 +1,5 @@
 ﻿namespace TRHJ_1060_Controller;
-public class TRHJ1060CommandBuilder
+public class TRHJ1060CommandBuilder : ICommandBuilder
 {
 		// Основные функции согласно Table 7 (стр. 11)
 	public enum SpiFunction : uint
@@ -14,7 +14,7 @@ public class TRHJ1060CommandBuilder
 		#region Channel Switch Functions (Таблица 8-9)
 
 
-	public static byte[] EnableAllChannelsMask(byte chipId, bool[] enabled)
+	public byte[] EnableChannelsMask(byte chipId, bool[] enabled)
 	{
 
 		if (chipId > 15) throw new ArgumentException("Chip ID must be 0-15");
@@ -41,7 +41,7 @@ public class TRHJ1060CommandBuilder
 
 		#region Amplitude and Phase Functions (Таблицы 10-13)
 
-	public static byte[] SetAmplitudePhase(
+	public byte[] SetAmplitudePhase(
 		byte chipId,
 		byte channel,
 		int mode,
@@ -70,7 +70,7 @@ public class TRHJ1060CommandBuilder
 		return ConvertFrameToBytes(frame);
 	}
 
-		private static uint ConvertAmplitudeToBits(double amplitudeDb)
+		private uint ConvertAmplitudeToBits(double amplitudeDb)
 		{
 			// Конвертация dB в битовое представление (0-31)
 			// 0dB = 0, -15.5dB = 31
@@ -78,7 +78,7 @@ public class TRHJ1060CommandBuilder
 			return (uint) Math.Clamp(value, 0, 31);
 		}
 
-		private static uint ConvertPhaseToBits(double phaseDegrees)
+		private uint ConvertPhaseToBits(double phaseDegrees)
 		{
 			// Конвертация градусов в битовое представление (0-63)
 			// 0° = 0, 354.375° = 63
@@ -86,7 +86,7 @@ public class TRHJ1060CommandBuilder
 			return (uint) (value % 64); // 6 бит = 64 значения
 		}
 
-		public static (double amplitudeDb, double phaseDegrees) ParseAmplitudePhase(uint amplitudeBits, uint phaseBits)
+		public (double amplitudeDb, double phaseDegrees) ParseAmplitudePhase(uint amplitudeBits, uint phaseBits)
 		{
 			var amplitudeDb = amplitudeBits * 0.5;
 			var phaseDegrees = phaseBits * 5.625;
@@ -97,7 +97,7 @@ public class TRHJ1060CommandBuilder
 
 		#region Control Register Functions (Таблицы 14-15)
 
-		public static byte[] WriteControlRegister(byte chipId, byte registerAddress, byte registerValue)
+		public byte[] WriteControlRegister(byte chipId, byte registerAddress, byte registerValue)
 		{
 			if (chipId > 15) throw new ArgumentException("Chip ID must be 0-15");
 
@@ -121,7 +121,7 @@ public class TRHJ1060CommandBuilder
 			return ConvertFrameToBytes(frame);
 		}
 
-		public static byte[] ReadControlRegister(byte chipId, byte registerAddress)
+		public byte[] ReadControlRegister(byte chipId, byte registerAddress)
 		{
 			if (chipId > 15) throw new ArgumentException("Chip ID must be 0-15");
 
@@ -149,7 +149,7 @@ public class TRHJ1060CommandBuilder
 
 		#region Signal Register Functions (Temperature Reading) (Таблицы 18-21)
 
-		public static byte[] ReadSignalRegister(byte chipId, byte registerAddress)
+		public byte[] ReadSignalRegister(byte chipId, byte registerAddress)
 		{
 			if (chipId > 15) throw new ArgumentException("Chip ID must be 0-15");
 
@@ -174,7 +174,7 @@ public class TRHJ1060CommandBuilder
 		}
 
 		// Подготовка к чтению температуры (многошаговая процедура - стр. 17-18)
-		public static byte[][] PrepareTemperatureReading(byte chipId)
+		public byte[][] PrepareTemperatureReading(byte chipId)
 		{
 			return new byte[][]
 			{
@@ -194,7 +194,7 @@ public class TRHJ1060CommandBuilder
 		/// </summary>
 		/// <param name="chipId">ID микросхемы</param>
 		/// <returns>Массив команд: 3 управляющих + 1 чтение сигнального регистра</returns>
-		public static byte[][] BuildTemperatureReadSequence(byte chipId)
+		public byte[][] BuildTemperatureReadSequence(byte chipId)
 		{
 			var sequence = new byte[4][];
 			// 1. CTRL244 = 0x00 (temperature input)
@@ -208,7 +208,7 @@ public class TRHJ1060CommandBuilder
 			return sequence;
 		}
 
-		public static float ParseTemperatureResponse(byte[] response)
+		public float ParseTemperatureResponse(byte[] response)
 		{
 			if (response == null || response.Length < 3)
 				return float.NaN;
@@ -225,19 +225,19 @@ public class TRHJ1060CommandBuilder
 
 		#region Special Commands
 
-		public static byte[] ResetChip(byte chipId)
+		public byte[] ResetChip(byte chipId)
 		{
 			// Команда сброса через контрольный регистр
 			return WriteControlRegister(chipId, 0xFF, 0x00);
 		}
 
-		public static byte[] InitializeDefaultRegisters(byte chipId)
+		public byte[] InitializeDefaultRegisters(byte chipId)
 		{
 			// Инициализация контрольных регистров по умолчанию (Таблица 15)
 			return WriteControlRegister(chipId, 0x00, 0x20); // CH1 TX PA bias
 		}
 
-		public static byte[] SetHighSpeedMode(byte chipId, bool highSpeed)
+		public byte[] SetHighSpeedMode(byte chipId, bool highSpeed)
 		{
 			// Установка высокоскоростного режима (Таблица 17)
 			byte value = highSpeed ? (byte) 0x00 : (byte) 0x0F;
@@ -248,14 +248,14 @@ public class TRHJ1060CommandBuilder
 
 		#region Special Commands for STM32 Protocol
 
-		public static class SpecialCommands
+		public class SpecialCommands
 		{
-			public static byte[] ResetCommand => new byte[] { 0x00, 0x00, 0x00 };
-			public static byte[] InitializeRegistersCommand => new byte[] { 0xFF, 0xFF, 0xFF };
-			public static byte[] TemperatureReadCommand => new byte[] { 0x02, 0x00, 0x00 };
+			public byte[] ResetCommand => new byte[] { 0x00, 0x00, 0x00 };
+			public byte[] InitializeRegistersCommand => new byte[] { 0xFF, 0xFF, 0xFF };
+			public byte[] TemperatureReadCommand => new byte[] { 0x02, 0x00, 0x00 };
 
 			// Команда для передачи данных (прошивка ожидает 0x01 в старшем байте)
-			public static byte[] CreateDataTransmitCommand(byte[] dataBytes)
+			public byte[] CreateDataTransmitCommand(byte[] dataBytes)
 			{
 				if (dataBytes.Length != 3)
 					throw new ArgumentException("Должно быть 3 байта данных");
@@ -268,7 +268,7 @@ public class TRHJ1060CommandBuilder
 
 		#region Utility Methods
 
-		private static byte[] ConvertFrameToBytes(uint frame)
+		public byte[] ConvertFrameToBytes(uint frame)
 		{
 			// Правильное преобразование 24-битного кадра в 3 байта
 			byte[] bytes = new byte[3];
@@ -278,27 +278,27 @@ public class TRHJ1060CommandBuilder
         return bytes;
 		}
 
-		public static uint BytesToFrame(byte[] bytes)
-		{
+		public uint BytesToFrame(byte[] bytes)
+		{	
 			if (bytes.Length != 3) return 0;
 			return ((uint) bytes[0] << 16) | ((uint) bytes[1] << 8) | bytes[2];
 		}
 
-		public static string FrameToBinaryString(uint frame)
+		public string FrameToBinaryString(uint frame)
 		{
 			return Convert.ToString(frame, 2).PadLeft(24, '0');
 		}
 
-		public static string BytesToHexString(byte[] bytes)
+		public string BytesToHexString(byte[] bytes)
 		{
 			return BitConverter.ToString(bytes).Replace("-", "");
 		}
 
-		public static void ParseFrame(uint frame, out byte chipId, out bool isRead, out SpiFunction function, out byte[] data)
+		public void ParseFrame(uint frame, out byte chipId, out bool isRead, out uint function, out byte[] data)
 		{
 			chipId = (byte) ((frame >> 20) & 0x0F);
 			isRead = ((frame >> 19) & 0x01) == 1;
-			function = (SpiFunction) ((frame >> 16) & 0x07);
+			function = ((frame >> 16) & 0x07);
 
 			data = new byte[2];
 			data[0] = (byte) ((frame >> 8) & 0xFF); // Address или старшие данные
@@ -309,7 +309,7 @@ public class TRHJ1060CommandBuilder
 
 		#region Predefined Control Registers (Таблица 15)
 
-		public static class ControlRegisters
+		public class ControlRegisters
 		{
 			// Bias registers
 			public const byte CH1_TX_PA_BIAS = 0x00;

@@ -11,6 +11,7 @@ public class ChipManagment
     private STM32Communicator _communicator;
     private SerialPortManager _serialPortManager;
     private ChipTypes _chipTypes;
+    private object _commandBuilder;
     private EventLogger _logger;
 
     public ChipManagment(ChipTypes chipType, SerialPortManager serialPort, EventLogger logger)
@@ -21,12 +22,12 @@ public class ChipManagment
         _logger = logger ?? new EventLogger();
     }
 
-    public async Task<string> InitializeChipAsync(byte chipId)
+    public async Task<string> InitializeChipAsync(byte chipId, )
     {
         try
         {
             _logger.LogInfo($"Инициализация чипа {chipId}...");
-            var command = TRHJ1060CommandBuilder.SpecialCommands.InitializeRegistersCommand;
+            var command = _commandBuilder.WriteControlRegister( chipId );
             var response = await _communicator.SendCommandAsync(command);
             _logger.LogCommand($"INIT ChipId={chipId}");
             _logger.LogResponse(response ?? "OK");

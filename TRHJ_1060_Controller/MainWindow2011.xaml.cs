@@ -28,6 +28,7 @@ public partial class MainWindow2011 : Window, INotifyPropertyChanged
     private EventLogger _logger;
     private int _chipId;
     private ButtonStateManager _buttonStateManager;
+    private TRHJ2011CommandBuilder _commandBuilder;
 
     const int _chipMode = 1;
 
@@ -52,6 +53,7 @@ public partial class MainWindow2011 : Window, INotifyPropertyChanged
         DataContext = _telemetryData;
         InitializeChipManagment(chipType, serialPort);
         _communicator = new STM32Communicator(serialPort);
+        _commandBuilder = new TRHJ2011CommandBuilder();
 
         // Привязка логера к текстовому полю
         TxtLog.Text = _logger.LogText;
@@ -60,7 +62,7 @@ public partial class MainWindow2011 : Window, INotifyPropertyChanged
 
     private void InitializeChipManagment(ChipTypes chipType, SerialPortManager serialPort)
     {
-        _chipManagment = new ChipManagment(chipType, serialPort, _logger);
+        _chipManagment = new ChipManagment(chipType, serialPort, _commandBuilder, _logger);
     }
 
     private void TxtRawCommand_GotFocus(object sender, RoutedEventArgs e)
