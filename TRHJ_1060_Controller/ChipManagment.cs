@@ -11,7 +11,7 @@ public class ChipManagment
     private STM32Communicator _communicator;
     private SerialPortManager _serialPortManager;
     private ChipTypes _chipTypes;
-    private object _commandBuilder;
+    private ICommandBuilder _commandBuilder;
     private EventLogger _logger;
 
     public ChipManagment(ChipTypes chipType, SerialPortManager serialPort, EventLogger logger)
@@ -20,17 +20,35 @@ public class ChipManagment
         _serialPortManager = serialPort;
         _communicator = new STM32Communicator(serialPort);
         _logger = logger ?? new EventLogger();
+
+        switch (chipType) 
+        { 
+            case ChipTypes.TRHJ_1060:
+                _commandBuilder = new TRHJ1060CommandBuilder();
+                break;
+            case ChipTypes.TRHJ_2011:
+                _commandBuilder = new TRHJ2011CommandBuilder();
+                break;
+            case ChipTypes.TRHJ_2041:
+                _commandBuilder = new TRHJ2041CommandBuilder();
+                break;
+        } 
+        
     }
 
-    public async Task<string> InitializeChipAsync(byte chipId, )
+    public async Task<string> InitializeChipAsync(byte chipId)
     {
         try
         {
             _logger.LogInfo($"Инициализация чипа {chipId}...");
-            var command = _commandBuilder.WriteControlRegister( chipId );
-            var response = await _communicator.SendCommandAsync(command);
+            var commands = _commandBuilder.InitializeDefaultRegisters(chipId);
+            string response = string.Empty;
+            foreach (var command in commands)
+            {
+                response = await _communicator.SendCommandAsync(command);
+                _logger.LogResponse(response ?? "OK");
+            }
             _logger.LogCommand($"INIT ChipId={chipId}");
-            _logger.LogResponse(response ?? "OK");
             return response;
         }
         catch (Exception ex)

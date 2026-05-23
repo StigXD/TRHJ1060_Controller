@@ -8,6 +8,8 @@ namespace TRHJ_1060_Controller;
 
 public class TRHJ2011CommandBuilder : ICommandBuilder
 {
+    private ControlRegisters controlRegisters = new ControlRegisters();
+
     #region Channel Switch Functions (Table 7-8, стр. 15)
 
     /// <summary>
@@ -105,11 +107,11 @@ public class TRHJ2011CommandBuilder : ICommandBuilder
         if (ctrlNumber > 63) throw new ArgumentException("CTRL number must be 0-63");
 
         uint frame = 0;
-        frame |= (uint)(chipId & 0x0F) << 20;               // D0-D3: Chip ID
+        frame |= (uint)(chipId & 0x0F) << 20;           // D0-D3: Chip ID
         frame |= 0u << 19;                             // D4: Write (0)
-        frame |= 0b01001u << 14;                       // D5-D9: 01001 (Control Register)
-        frame |= (uint)(ctrlNumber & 0x3F) << 8;      // D10-D15: Address (6 бит)
-        frame |= (uint)data8bit;                 // D16-D23: Data (8 бит)
+        frame |= 0b01001u << 14;                      // D5-D9: 01001 (Control Register)
+        frame |= (uint)(ctrlNumber & 0x3F) << 8;     // D10-D15: Address (6 бит)
+        frame |= (uint)data8bit;                    // D16-D23: Data (8 бит)
 
         return ConvertFrameToBytes(frame);
     }
@@ -120,10 +122,10 @@ public class TRHJ2011CommandBuilder : ICommandBuilder
         if (ctrlNumber > 63) throw new ArgumentException("CTRL number must be 0-63");
 
         uint frame = 0;
-        frame |= (uint)(chipId & 0x0F) << 20;               // D0-D3: Chip ID
+        frame |= (uint)(chipId & 0x0F) << 20;           // D0-D3: Chip ID
         frame |= 1u << 19;                             // D4: Read (1)
-        frame |= 0b01001u << 14;                       // D5-D9: 01001 (Control Register)
-        frame |= (uint)(ctrlNumber & 0x3F) << 8;      // D10-D15: Address (6 бит)
+        frame |= 0b01001u << 14;                      // D5-D9: 01001 (Control Register)
+        frame |= (uint)(ctrlNumber & 0x3F) << 8;     // D10-D15: Address (6 бит)
 
         return ConvertFrameToBytes(frame);
     }
@@ -210,7 +212,7 @@ public class TRHJ2011CommandBuilder : ICommandBuilder
         var sequence = new byte[3][];
         sequence[0] = WriteControlRegister(chipId, 62, 0x00);   // CTRL62: ADC input selection
         sequence[1] = WriteControlRegister(chipId, 63, 0x20);  // CTRL63: Temperature calibration
-        sequence[2] = ReadSignalRegister(chipId, 0x07);             // SIG07
+        sequence[2] = ReadSignalRegister(chipId, 0x07);       // SIG07
         return sequence;
     }
 
@@ -225,7 +227,7 @@ public class TRHJ2011CommandBuilder : ICommandBuilder
         // 10 бит данных (игнорируем D12-D13)
         // Согласно документации: D8-D11 и D14-D19
         uint highBits = (uint)((response[1] >> 0) & 0x0F);  // D8-D11 (младшие 4 бита 2-го байта)
-        uint lowBits = (uint)((response[2] >> 0) & 0x3F);   // D14-D19 (младшие 6 бит 3-го байта)
+        uint lowBits = (uint)((response[2] >> 0) & 0x3F);  // D14-D19 (младшие 6 бит 3-го байта)
         uint adcValue = (highBits << 6) | lowBits;
 
         // Формула: Temperature = 249 - 0.364 * Code
@@ -243,10 +245,12 @@ public class TRHJ2011CommandBuilder : ICommandBuilder
         return WriteControlRegister(chipId, 0xFF, 0x00);
     }
 
-    public byte[] InitializeDefaultRegisters(byte chipId)
+    public byte[][] InitializeDefaultRegisters(byte chipId)
     {
-        // Инициализация контрольных регистров по умолчанию (Таблица 15)
-        return WriteControlRegister(chipId, 0x00, 0x20); // CH1 TX PA bias
+        var registers = new byte[controlRegisters.ControlRegisterAddress2011.Count()][];
+        for (var i = 0; i < controlRegisters.ControlRegisterAddress2011.Count(); i++)
+            registers[i] = WriteControlRegister(chipId, controlRegisters.ControlRegisterAddress2011[i], controlRegisters.ControlRegisterValue2011[i]);
+        return registers;
     }
 
     public byte[] SetHighSpeedMode(byte chipId, bool highSpeed)

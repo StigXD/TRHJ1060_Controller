@@ -18,7 +18,7 @@ public interface ICommandBuilder
     public abstract byte[][] BuildTemperatureReadSequence(byte chipId);
     public abstract float ParseTemperatureResponse(byte[] response);
     public abstract byte[] ResetChip(byte chipId);
-    public abstract byte[] InitializeDefaultRegisters(byte chipId);
+    public abstract byte[][] InitializeDefaultRegisters(byte chipId);
     public abstract byte[] SetHighSpeedMode(byte chipId, bool highSpeed);
     public abstract byte[] ConvertFrameToBytes(uint frame);
     public abstract uint BytesToFrame(byte[] bytes);
