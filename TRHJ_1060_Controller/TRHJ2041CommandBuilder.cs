@@ -8,6 +8,8 @@ namespace TRHJ_1060_Controller;
 
 public class TRHJ2041CommandBuilder : ICommandBuilder
 {
+    private ControlRegisters controlRegisters = new ControlRegisters();
+
     #region Channel Switch Functions (Table 7-8, стр. 15)
 
     /// <summary>
@@ -243,10 +245,16 @@ public class TRHJ2041CommandBuilder : ICommandBuilder
         return WriteControlRegister(chipId, 0xFF, 0x00);
     }
 
-    public byte[] InitializeDefaultRegisters(byte chipId)
+    public string InitializeDefaultRegisters(byte chipId)
     {
-        // Инициализация контрольных регистров по умолчанию (Таблица 15)
-        return WriteControlRegister(chipId, 0x00, 0x20); // CH1 TX PA bias
+        string regInString = string.Empty;
+        var registers = new byte[controlRegisters.ControlRegisterAddress2041.Count()][];
+        for (var i = 0; i < controlRegisters.ControlRegisterAddress2041.Count(); i++)
+        {
+            registers[i] = WriteControlRegister(chipId, controlRegisters.ControlRegisterAddress2041[i], controlRegisters.ControlRegisterValue2041[i]);
+            regInString += BytesToHexString(registers[i])+" ";
+        }
+        return regInString.TrimEnd();
     }
 
     public byte[] SetHighSpeedMode(byte chipId, bool highSpeed)

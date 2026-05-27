@@ -236,7 +236,6 @@ public class TRHJ2011CommandBuilder : ICommandBuilder
 
     #endregion
 
-
     #region Special Commands
 
     public byte[] ResetChip(byte chipId)
@@ -245,12 +244,16 @@ public class TRHJ2011CommandBuilder : ICommandBuilder
         return WriteControlRegister(chipId, 0xFF, 0x00);
     }
 
-    public byte[][] InitializeDefaultRegisters(byte chipId)
+    public string InitializeDefaultRegisters(byte chipId)
     {
+        string regInString = string.Empty;
         var registers = new byte[controlRegisters.ControlRegisterAddress2011.Count()][];
         for (var i = 0; i < controlRegisters.ControlRegisterAddress2011.Count(); i++)
+        {
             registers[i] = WriteControlRegister(chipId, controlRegisters.ControlRegisterAddress2011[i], controlRegisters.ControlRegisterValue2011[i]);
-        return registers;
+            regInString += BytesToHexString(registers[i]) + " ";
+        }
+        return regInString.TrimEnd();
     }
 
     public byte[] SetHighSpeedMode(byte chipId, bool highSpeed)

@@ -41,14 +41,14 @@ public class STM32Communicator
     }
     public async Task<string> SendCommandAsync(string hexCommand)
     {
-        // Убедимся, что это валидная HEX строка
-		if (hexCommand.Length % 2 != 0)
-            throw new ArgumentException("HEX команда должна содержать четное количество символов");
-      
+  //      // Убедимся, что это валидная HEX строка
+		//if (hexCommand.Length % 2 != 0)
+  //          throw new ArgumentException("HEX команда должна содержать четное количество символов");
+
         // Добавляем символ новой строки если его нет
 		if (!hexCommand.EndsWith("\n"))
         {
-            hexCommand += "\n";
+                hexCommand += "\n";
         }
         
         await _serialPort.WriteAsync(Encoding.ASCII.GetBytes(hexCommand), 0, hexCommand.Length);

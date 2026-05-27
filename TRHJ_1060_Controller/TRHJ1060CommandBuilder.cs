@@ -1,20 +1,22 @@
-﻿namespace TRHJ_1060_Controller;
+﻿using System.Text;
+
+namespace TRHJ_1060_Controller;
 public class TRHJ1060CommandBuilder : ICommandBuilder
 {
-		// Основные функции согласно Table 7 (стр. 11)
-	public enum SpiFunction : uint
-	{
-			ChannelSwitch = 0b000,       // D5-D7: 000
-			AmplitudePhase = 0b001,      // D5-D7: 001  
-			CalibrationRegister = 0b010, // D5-D7: 010
-			SignalRegister = 0b101,      // D5-D7: 101
-			ControlRegister = 0b011      // D5-D7: 011
-	}
+    private ControlRegisters controlRegisters = new ControlRegisters();
 
-		#region Channel Switch Functions (Таблица 8-9)
+    // Основные функции согласно Table 7 (стр. 11)
+    public enum SpiFunction : uint
+    {
+        ChannelSwitch = 0b000,       // D5-D7: 000
+        AmplitudePhase = 0b001,      // D5-D7: 001  
+        CalibrationRegister = 0b010, // D5-D7: 010
+        SignalRegister = 0b101,      // D5-D7: 101
+        ControlRegister = 0b011      // D5-D7: 011
+    }
 
-
-	public byte[] EnableChannelsMask(byte chipId, bool[] enabled)
+    #region Channel Switch Functions (Таблица 8-9)
+    public byte[] EnableChannelsMask(byte chipId, bool[] enabled)
 	{
 
 		if (chipId > 15) throw new ArgumentException("Chip ID must be 0-15");
@@ -36,10 +38,9 @@ public class TRHJ1060CommandBuilder : ICommandBuilder
 		
 		return ConvertFrameToBytes(frame);
 	}
+	#endregion
 
-		#endregion
-
-		#region Amplitude and Phase Functions (Таблицы 10-13)
+	#region Amplitude and Phase Functions (Таблицы 10-13)
 
 	public byte[] SetAmplitudePhase(
 		byte chipId,
@@ -95,7 +96,7 @@ public class TRHJ1060CommandBuilder : ICommandBuilder
 
 		#endregion
 
-		#region Control Register Functions (Таблицы 14-15)
+	#region Control Register Functions (Таблицы 14-15)
 
 		public byte[] WriteControlRegister(byte chipId, byte registerAddress, byte registerValue)
 		{
@@ -147,7 +148,7 @@ public class TRHJ1060CommandBuilder : ICommandBuilder
 
 		#endregion
 
-		#region Signal Register Functions (Temperature Reading) (Таблицы 18-21)
+	#region Signal Register Functions (Temperature Reading) (Таблицы 18-21)
 
 		public byte[] ReadSignalRegister(byte chipId, byte registerAddress)
 		{
@@ -223,30 +224,32 @@ public class TRHJ1060CommandBuilder : ICommandBuilder
 
 		#endregion
 
-		#region Special Commands
-
-		public byte[] ResetChip(byte chipId)
-		{
+	#region Special Commands
+	public byte[] ResetChip(byte chipId)
+	{
 			// Команда сброса через контрольный регистр
 			return WriteControlRegister(chipId, 0xFF, 0x00);
-		}
-
-		public byte[] InitializeDefaultRegisters(byte chipId)
+	}
+	public string InitializeDefaultRegisters(byte chipId)
+	{
+        string regInString = string.Empty;
+        var registers = new byte[controlRegisters.ControlRegisterAddress1060.Count()][];
+		for (var i = 0; i < controlRegisters.ControlRegisterAddress1060.Count(); i++)
 		{
-			// Инициализация контрольных регистров по умолчанию (Таблица 15)
-			return WriteControlRegister(chipId, 0x00, 0x20); // CH1 TX PA bias
-		}
-
-		public byte[] SetHighSpeedMode(byte chipId, bool highSpeed)
-		{
-			// Установка высокоскоростного режима (Таблица 17)
-			byte value = highSpeed ? (byte) 0x00 : (byte) 0x0F;
-			return WriteControlRegister(chipId, 0x20, value);
-		}
-
+			registers[i] = WriteControlRegister(chipId, controlRegisters.ControlRegisterAddress1060[i], controlRegisters.ControlRegisterValue1060[i]);
+            regInString += BytesToHexString(registers[i]) + " ";
+        }
+        return regInString.TrimEnd();
+	}
+	public byte[] SetHighSpeedMode(byte chipId, bool highSpeed)
+	{
+		// Установка высокоскоростного режима (Таблица 17)
+		byte value = highSpeed ? (byte) 0x00 : (byte) 0x0F;
+		return WriteControlRegister(chipId, 0x20, value);
+	}
 		#endregion
 
-		#region Special Commands for STM32 Protocol
+	#region Special Commands for STM32 Protocol
 
 		public class SpecialCommands
 		{
@@ -266,7 +269,7 @@ public class TRHJ1060CommandBuilder : ICommandBuilder
 
 		#endregion
 
-		#region Utility Methods
+	#region Utility Methods
 
 		public byte[] ConvertFrameToBytes(uint frame)
 		{
@@ -306,29 +309,4 @@ public class TRHJ1060CommandBuilder : ICommandBuilder
 		}
 
 		#endregion
-
-		#region Predefined Control Registers (Таблица 15)
-
-		public class ControlRegisters
-		{
-			// Bias registers
-			public const byte CH1_TX_PA_BIAS = 0x00;
-			public const byte CH1_TX_DA_BIAS = 0x01;
-			public const byte CH1_TX_AMP_BIAS = 0x02;
-			public const byte CH1_RX_LNA_BIAS = 0x03;
-			public const byte CH1_RX_AMP_BIAS = 0x04;
-
-			// Temperature coefficients (Таблица 16)
-			public const byte TX_DA_TEMP_COEFF = 0xF6;  // CTRL246
-			public const byte TX_PA_TEMP_COEFF = 0xF7;  // CTRL247
-			public const byte TX_AMP_TEMP_COEFF = 0xFA; // CTRL250
-			public const byte RX_LNA_TEMP_COEFF = 0xFB; // CTRL251
-			public const byte RX_AMP_TEMP_COEFF = 0xFE; // CTRL254
-
-			// Default values
-			public const byte DEFAULT_BIAS = 0x20;
-			public const byte DEFAULT_TEMP_COEFF = 0x5A;
-		}
-
-		#endregion
-	}
+}

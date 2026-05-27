@@ -43,11 +43,8 @@ public class ChipManagment
             _logger.LogInfo($"Инициализация чипа {chipId}...");
             var commands = _commandBuilder.InitializeDefaultRegisters(chipId);
             string response = string.Empty;
-            foreach (var command in commands)
-            {
-                response = await _communicator.SendCommandAsync(command);
-                _logger.LogResponse(response ?? "OK");
-            }
+            response = await _communicator.SendCommandAsync(commands);
+            _logger.LogResponse(response ?? "OK");
             _logger.LogCommand($"INIT ChipId={chipId}");
             return response;
         }
@@ -63,7 +60,7 @@ public class ChipManagment
         try
         {
             _logger.LogInfo($"Сброс чипа {chipId}...");
-            var command = TRHJ1060CommandBuilder.ResetChip(chipId);
+            var command = _commandBuilder.ResetChip(chipId);
             var response = await _communicator.SendCommandAsync(command);
             _logger.LogCommand($"RESET ChipId={chipId}");
             _logger.LogResponse(response ?? "OK");
@@ -82,7 +79,7 @@ public class ChipManagment
         {
             _logger.LogInfo($"Установка параметров: ChipId={chipId}, Mode={mode}, Channel={channel}, Att={att}dB, Phase={phase}°");
             
-            var command = TRHJ1060CommandBuilder.SetAmplitudePhase(chipId, channel, mode, att, phase);
+            var command = _commandBuilder.SetAmplitudePhase(chipId, channel, mode, att, phase);
             var response = await _communicator.SendCommandAsync(command);
             _logger.LogCommand($"SET ChipId={chipId}, Ch={channel}, {mode}, Att={att}, Phase={phase}");
             _logger.LogResponse(response ?? "OK");
@@ -101,7 +98,7 @@ public class ChipManagment
         {
             _logger.LogInfo($"Включение канала: ChipId={chipId}, Channel={channel}");
             
-            var command = TRHJ1060CommandBuilder.EnableAllChannelsMask(chipId, enableChannels);
+            var command = _commandBuilder.EnableChannelsMask(chipId, enableChannels);
             var response = await _communicator.SendCommandAsync(command);
             _logger.LogCommand($"ENABLE ChipId={chipId}, Ch={channel}, Mode={mode}");
             _logger.LogResponse(response ?? "OK");
@@ -121,7 +118,7 @@ public class ChipManagment
             _logger.LogInfo($"Отключение канала: ChipId={chipId}, Channel={channel}");
             
             // Отключаем канал
-            var command = TRHJ1060CommandBuilder.EnableAllChannelsMask(chipId, enableChannels);
+            var command = _commandBuilder.EnableChannelsMask(chipId, enableChannels);
             var response = await _communicator.SendCommandAsync(command);
             _logger.LogCommand($"DISABLE ChipId={chipId}, Ch={channel}");
             _logger.LogResponse(response ?? "OK");
@@ -144,7 +141,7 @@ public class ChipManagment
             var responses = new List<string>();
             for (byte i = 0; i < 4; i++)
             {
-                var command = TRHJ1060CommandBuilder.SetAmplitudePhase(chipId, i, mode, att, phase);
+                var command = _commandBuilder.SetAmplitudePhase(chipId, i, mode, att, phase);
                 var response = await _communicator.SendCommandAsync(command);
                 responses.Add(response ?? $"OK (Ch{i})");
             }
@@ -168,7 +165,7 @@ public class ChipManagment
             _logger.LogInfo($"Включение всех каналов: ChipId={chipId}");
             
             var enabled = new bool[] { true, true, true, true };
-            var command = TRHJ1060CommandBuilder.EnableAllChannelsMask(chipId, enabled);
+            var command = _commandBuilder.EnableChannelsMask(chipId, enabled);
             var response = await _communicator.SendCommandAsync(command);
             _logger.LogCommand($"SWITCH ON ALL CHANNELS ChipId={chipId}");
             _logger.LogResponse(response ?? "OK");
@@ -188,7 +185,7 @@ public class ChipManagment
             _logger.LogInfo($"Отключение всех каналов: ChipId={chipId}");
             
             var enabled = new bool[] { false, false, false, false };
-            var command = TRHJ1060CommandBuilder.EnableAllChannelsMask(chipId, enabled);
+            var command = _commandBuilder.EnableChannelsMask(chipId, enabled);
             var response = await _communicator.SendCommandAsync(command);
             _logger.LogCommand($"SWITCH OFF ALL CHANNELS ChipId={chipId}");
             _logger.LogResponse(response ?? "OK");
@@ -212,7 +209,7 @@ public class ChipManagment
             {
                 for (byte channel = 0; channel < 4; channel++)
                 {
-                    var command = TRHJ1060CommandBuilder.SetAmplitudePhase(chipId, channel, mode, att, phase);
+                    var command = _commandBuilder.SetAmplitudePhase(chipId, channel, mode, att, phase);
                     var response = await _communicator.SendCommandAsync(command);
                     responses.Add(response ?? $"OK (ChipId={chipId}, Ch={channel})");
                 }
@@ -240,7 +237,7 @@ public class ChipManagment
             for (byte chipId = 0; chipId < 16; chipId++)
             {
                 var enabled = new bool[] { true, true, true, true };
-                var command = TRHJ1060CommandBuilder.EnableAllChannelsMask(chipId, enabled);
+                var command = _commandBuilder.EnableChannelsMask(chipId, enabled);
                 var response = await _communicator.SendCommandAsync(command);
                 responses.Add(response ?? $"OK (ChipId={chipId})");
             }
@@ -267,7 +264,7 @@ public class ChipManagment
             for (byte chipId = 0; chipId < 16; chipId++)
             {
                 var enabled = new bool[] { false, false, false, false };
-                var command = TRHJ1060CommandBuilder.EnableAllChannelsMask(chipId, enabled);
+                var command = _commandBuilder.EnableChannelsMask(chipId, enabled);
                 var response = await _communicator.SendCommandAsync(command);
                 responses.Add(response ?? $"OK (ChipId={chipId})");
             }
